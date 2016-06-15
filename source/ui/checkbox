@@ -1,0 +1,30 @@
+allextend.ui.checkbox = {
+  new = function(x, y, width, height, checked)
+    local w = widget.new(x, y, width, height)
+    
+    w.backgroundcolor = colors.black
+    w.textcolor = colors.white
+    w.checked = checked or false
+    
+    w.draw = function(self, screen)
+      if self.visible then
+        screen:drawBox(self.x, self.y, self.width, self.height, self.backgroundcolor)
+        
+        if self.checked then
+          local x = self.x + math.floor(self.width / 2)
+          local y = self.y + math.floor(self.height / 2)
+          
+          screen:drawText(x, y, "X", self.backgroundcolor, self.textcolor)
+        end
+      end
+    end
+    
+    w.onclick = function(self, button, x, y)
+      if button == 1 then
+        self.checked = not self.checked
+      end
+    end
+    
+    return w
+  end
+}
